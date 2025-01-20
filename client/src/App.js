@@ -8,6 +8,9 @@ function App() {
   const [error, setError] = useState('');
   const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
+  // We'll read the environment variable here:
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   const handleFileChange = (event) => {
     setError('');
     setResult('');
@@ -33,7 +36,8 @@ function App() {
     formData.append('image', selectedFile);
 
     try {
-      const response = await fetch('http://localhost:5000/classify', {
+      // Now use the variable instead of a hardcoded string:
+      const response = await fetch(`${API_BASE_URL}/classify`, {
         method: 'POST',
         body: formData,
       });
@@ -80,14 +84,14 @@ function App() {
             <img src={imagePreviewUrl} alt="Preview" />
           </div>
         )}
-          {selectedFile && (
-        <button
-          onClick={handleSubmit}
-          disabled={loading}
-          className="classify-button"
-        >
-          {loading ? 'Finding...' : 'Find'}
-        </button>
+        {selectedFile && (
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className="classify-button"
+          >
+            {loading ? 'Finding...' : 'Find'}
+          </button>
         )}
         {result && (
           <div className="result-section">
