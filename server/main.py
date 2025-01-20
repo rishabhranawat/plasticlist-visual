@@ -93,7 +93,7 @@ def classify_image():
 
     # Upload the image to Gemini and wait for it to be active
     gemini_image_file = upload_to_gemini(temp_path, mime_type="image/png")
-    wait_for_files_active([gemini_image_file])
+    # wait_for_files_active([gemini_image_file])
 
     # Start a new chat session with the samples file + instruction in the first user message
     chat_session = model.start_chat(
@@ -118,7 +118,6 @@ def classify_image():
         for possible_product in top_k:
             if possible_product in ALL_PRODUCTS:
                 product_id = DF_P[DF_P["product"] == possible_product].iloc[0].product_id
-                print(product_id)
                 return jsonify({"response": str(product_id)})
 
     return jsonify({"response": "Product Not Found."})
