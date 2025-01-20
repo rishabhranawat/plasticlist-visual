@@ -5,7 +5,6 @@ from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 import pandas as pd
 import requests
-from bs4 import BeautifulSoup
 
 import google.generativeai as genai
 from dotenv import load_dotenv
@@ -125,7 +124,5 @@ def classify_image():
     return jsonify({"response": "Product Not Found."})
 
 # ------ Run the Flask app ------
-
 if __name__ == "__main__":
-    # For local testing. Adjust host/port as needed.
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(debug=True)
