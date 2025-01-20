@@ -8,6 +8,10 @@ import requests
 from bs4 import BeautifulSoup
 
 import google.generativeai as genai
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app, resources={r"/classify": {"origins": "*"}})
